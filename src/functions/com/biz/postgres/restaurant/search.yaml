@@ -1,33 +1,20 @@
 summary: Fetch many Restaurant
 tasks:
-  - id: postgres_restaurant_search1
+  - id: postgres_restaurant_search2
     fn: com.gs.datastore
     args:
       datasource: postgres
       data:
-        where: 
-          location:
-            contains: <% inputs.body.location %>
-        orderBy: 
-          id: "asc"    
+        where:
+          location: 
+            contains : <% inputs.body.location %>
+        include:
+          menuItems:
+            where: 
+              couponCode: 
+                equals :
+                  <% inputs.body.couponCode %>
+        orderBy:
+            id: "asc"                  
       config:
-        method: Restaurant.findMany 
-  - id: postgres_restaurant_search2
-    fn: com.biz.postgres.menuitems.search
-    args: 
-      datasource: postgres
-      data: <% inputs.body %>
-      config:
-        method: MenuItems.findMany
-
-  - id: postgres_restaurant_search3
-    fn: com.gs.transform
-    args:
-      code: 200
-      data: <% outputs.postgres_restaurant_search1.data %>
-
-      
-
-    
-  
-
+        method: Restaurant.findMany
