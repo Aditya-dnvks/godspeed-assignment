@@ -41,7 +41,7 @@ model MenuItems {
   description String?
   price Int
   couponCode String[]
-  restaurant Restaurant @relation(fields: [restaurantId], references: id)
+  restaurant Restaurant @relation(fields: [restaurantId], references: id, onDelete: Cascade)
   restaurantId  Int
 }
 
