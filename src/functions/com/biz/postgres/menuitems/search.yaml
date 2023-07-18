@@ -4,6 +4,8 @@ tasks:
     fn: com.gs.datastore
     args:
       datasource: postgres
-      data: <% inputs.body %>
+      data: 
+        orderBy:
+         id: "asc"
       config:
         method: MenuItems.findMany
